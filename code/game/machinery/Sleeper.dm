@@ -32,18 +32,18 @@
 /obj/machinery/sleeper/Initialize(mapload, d = 0, populate_parts = TRUE)
 	. = ..()
 	if(populate_parts)
-		beaker = new /obj/item/weapon/reagent_containers/glass/beaker/large(src)
+		beaker = new/obj/item/weapon/reagent_containers/glass/beaker/large(src)
 	update_icon()
 
 /obj/machinery/sleeper/examine(mob/user, distance)
 	. = ..()
 	if (distance <= 1)
-		if (beaker)
-			to_chat(user, "It is loaded with a beaker.")
+		if(beaker)
+			. += "It is loaded with a beaker."
 		if(occupant)
-			occupant.examine(arglist(args))
-		if (emagged && user.skill_check(SKILL_MEDICAL, SKILL_EXPERT))
-			to_chat(user, "The sleeper chemical synthesis controls look tampered with.")
+			. += occupant.examine(arglist(args))
+		if(emagged && user.skill_check(SKILL_MEDICAL, SKILL_EXPERT))
+			. += "The sleeper chemical synthesis controls look tampered with."
 
 
 /obj/machinery/sleeper/Process()

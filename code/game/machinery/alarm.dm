@@ -841,9 +841,9 @@
 /obj/machinery/alarm/examine(mob/user)
 	. = ..()
 	if (buildstage < 2)
-		to_chat(user, "It is not wired.")
+		. += "It is not wired."
 	if (buildstage < 1)
-		to_chat(user, "The circuit is missing.")
+		. += "The circuit is missing."
 /*
 AIR ALARM CIRCUIT
 Just a object used in constructing air alarms
@@ -882,7 +882,7 @@ FIRE ALARM
 /obj/machinery/firealarm/examine(mob/user)
 	. = ..()
 	var/decl/security_state/security_state = decls_repository.get_decl(GLOB.using_map.security_state)
-	to_chat(user, "The current alert level is [security_state.current_security_level.name].")
+	. += "The current alert level is [security_state.current_security_level.name]."
 
 /obj/machinery/firealarm/Initialize()
 	. = ..()

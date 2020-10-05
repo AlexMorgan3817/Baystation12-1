@@ -64,7 +64,7 @@
 /obj/machinery/door/blast/examine(mob/user)
 	. = ..()
 	if((stat & BROKEN))
-		to_chat(user, "It's broken.")
+		. += "It's broken."
 
 // Proc: Bumped()
 // Parameters: 1 (AM - Atom that tried to walk through this object)

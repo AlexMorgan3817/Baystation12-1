@@ -30,7 +30,7 @@
 		machine.update_icon()
 		return
 	if(istype(I, /obj/item/weapon/storage/part_replacer))
-		machine.display_parts(user)
+		to_chat(user, machine.display_parts())
 		return TRUE
 
 /decl/machine_construction/default/panel_closed/post_construct(obj/machinery/machine)

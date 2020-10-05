@@ -100,7 +100,7 @@
 
 	var/obj/item/weapon/cell/C = charging.get_cell()
 	if(!isnull(C))
-		to_chat(user, "Item's charge at [round(C.percent())]%.")
+		. += "Item's charge at [round(C.percent())]%."
 
 /obj/machinery/recharger/wallcharger
 	name = "wall recharger"

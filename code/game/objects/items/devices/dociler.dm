@@ -15,7 +15,7 @@
 
 /obj/item/device/dociler/examine(mob/user)
 	. = ..()
-	to_chat(user, "<span class='notice'>It is currently set to [mode] docile mode.</span>")
+	. += SPAN_NOTICE("It is currently set to [mode] docile mode.")
 
 /obj/item/device/dociler/attack_self(var/mob/user)
 	if(mode == "somewhat")

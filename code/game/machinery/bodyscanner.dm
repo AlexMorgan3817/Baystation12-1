@@ -16,7 +16,7 @@
 /obj/machinery/bodyscanner/examine(mob/user)
 	. = ..()
 	if (occupant && user.Adjacent(src))
-		occupant.examine(arglist(args))
+		. += occupant.examine(arglist(args))
 
 /obj/machinery/bodyscanner/relaymove(mob/user as mob)
 	..()

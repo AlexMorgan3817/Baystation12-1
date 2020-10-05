@@ -45,10 +45,10 @@
 	. = ..()
 	if(victim)
 		if(stat & NOPOWER)
-			to_chat(user, SPAN_NOTICE("It's unpowered."))
+			. += SPAN_NOTICE("It's unpowered.")
 			return
-		to_chat(user, SPAN_NOTICE("Vitals of [victim]:"))
-		to_chat(user, SPAN_NOTICE("Pulse: [victim.get_pulse(GETPULSE_TOOL)]"))
+		. += SPAN_NOTICE("Vitals of [victim]:")
+		. += SPAN_NOTICE("Pulse: [victim.get_pulse(GETPULSE_TOOL)]")
 
 		var/brain_activity = "none"
 		var/obj/item/organ/internal/brain/brain = victim.internal_organs_by_name[BP_BRAIN]
@@ -63,7 +63,7 @@
 						brain_activity = "extremely weak"
 			else
 				brain_activity = "some"
-		to_chat(user, SPAN_NOTICE("Brain activity: [brain_activity]"))
+		. += SPAN_NOTICE("Brain activity: [brain_activity]")
 
 		var/breathing = "none"
 		var/obj/item/organ/internal/lungs/lungs = victim.internal_organs_by_name[BP_LUNGS]
@@ -73,9 +73,9 @@
 			else if(lungs.breath_fail_ratio < 1)
 				breathing = "shallow"
 		
-		to_chat(user, SPAN_NOTICE("Breathing: [breathing]"))
+		. += SPAN_NOTICE("Breathing: [breathing]")
 	if(connected_optable)
-		to_chat(user, SPAN_NOTICE("Connected to adjacent [connected_optable]."))
+		. += SPAN_NOTICE("Connected to adjacent [connected_optable].")
 
 /obj/machinery/vitals_monitor/Process()
 	if(QDELETED(victim))

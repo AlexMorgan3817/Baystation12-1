@@ -42,7 +42,7 @@
 	. = ..()
 	if(locked)
 		var/turf/T = get_turf(locked)
-		to_chat(user, "<span class='notice'>The console is locked on to \[[T.loc.name]\].</span>")
+		. += "<span class='notice'>The console is locked on to \[[T.loc.name]\].</span>"
 
 
 /obj/machinery/computer/teleporter/attackby(var/obj/I, var/mob/living/user)

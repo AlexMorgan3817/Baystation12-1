@@ -197,7 +197,7 @@
 /obj/machinery/door/unpowered/simple/examine(mob/user, distance)
 	. = ..()
 	if(distance <= 1 && lock)
-		to_chat(user, "<span class='notice'>It appears to have a lock.</span>")
+		. += SPAN_NOTICE("It appears to have a lock."
 
 /obj/machinery/door/unpowered/simple/can_open()
 	if(!..() || (lock && lock.isLocked()))

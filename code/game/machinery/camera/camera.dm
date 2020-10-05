@@ -39,7 +39,7 @@
 /obj/machinery/camera/examine(mob/user)
 	. = ..()
 	if(stat & BROKEN)
-		to_chat(user, "<span class='warning'>It is completely demolished.</span>")
+		. += SPAN_WARNING("It is completely demolished.")
 
 /obj/machinery/camera/malf_upgrade(var/mob/living/silicon/ai/user)
 	..()

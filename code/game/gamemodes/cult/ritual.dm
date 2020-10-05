@@ -17,9 +17,9 @@
 /obj/item/weapon/book/tome/examine(mob/user)
 	. = ..()
 	if(!iscultist(user))
-		to_chat(user, "An old, dusty tome with frayed edges and a sinister looking cover.")
+		. += "An old, dusty tome with frayed edges and a sinister looking cover.")
 	else
-		to_chat(user, "The scriptures of Nar-Sie, The One Who Sees, The Geometer of Blood. Contains the details of every ritual his followers could think of. Most of these are useless, though.")
+		. += "The scriptures of Nar-Sie, The One Who Sees, The Geometer of Blood. Contains the details of every ritual his followers could think of. Most of these are useless, though.")
 
 /obj/item/weapon/book/tome/afterattack(var/atom/A, var/mob/user, var/proximity)
 	if(!proximity || !iscultist(user))

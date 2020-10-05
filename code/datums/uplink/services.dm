@@ -73,15 +73,15 @@
 	if(distance <= 1)
 		switch(state)
 			if(AWAITING_ACTIVATION)
-				to_chat(user, "It is labeled '[service_label]' and appears to be awaiting activation.")
+				. += "It is labeled '[service_label]' and appears to be awaiting activation."
 			if(CURRENTLY_ACTIVE)
-				to_chat(user, "It is labeled '[service_label]' and appears to be active.")
+				. += "It is labeled '[service_label]' and appears to be active."
 			if(HAS_BEEN_ACTIVATED)
-				to_chat(user, "It is labeled '[service_label]' and appears to be permanently disabled.")
+				. += "It is labeled '[service_label]' and appears to be permanently disabled."
 
 /obj/item/device/uplink_service/attack_self(var/mob/user)
 	if(state != AWAITING_ACTIVATION)
-		to_chat(user, "<span class='warning'>\The [src] won't activate again.</span>")
+		. += SPAN_WARNING("\The [src] won't activate again.")
 		return
 	var/obj/effect/overmap/visitable/O = map_sectors["[get_z(src)]"]
 	var/choice = alert(user, "This will only affect your current location[istype(O) ? " ([O])" : ""]. Proceed?","Confirmation", "Yes", "No")
@@ -91,7 +91,7 @@
 		return
 	state = CURRENTLY_ACTIVE
 	update_icon()
-	user.visible_message("<span class='notice'>\The [user] activates \the [src].</span>", "<span class='notice'>You activate \the [src].</span>")
+	user.visible_message(SPAN_NOTICE("\The [user] activates \the [src].</span>", "<span class='notice'>You activate \the [src]."))
 	log_and_message_admins("has activated the service '[service_label]'", user)
 
 	if(service_duration)

@@ -40,10 +40,10 @@
 /obj/item/device/personal_shield/examine(mob/user, distance)
 	. = ..()
 	if(power_cell)
-		power_cell.examine(user, distance)
+		. += power_cell.examine(user, distance)
 	else
-		to_chat(user, "There is no cell in \the [src].")
-	to_chat(user, "The internal capacitor currently has [round(currently_stored_power/max_stored_power)]% charge.")
+		. += "There is no cell in \the [src].")
+	. += "The internal capacitor currently has [round(currently_stored_power/max_stored_power)]% charge.")
 
 /obj/item/device/personal_shield/attackby(var/obj/item/W, var/mob/user)
 	if(istype(W, /obj/item/weapon/cell))

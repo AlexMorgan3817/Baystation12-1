@@ -308,26 +308,25 @@
 /mob/proc/show_inv(mob/user as mob)
 	return
 
+/mob/proc/look_at(target)
+	if(!isghost(src) && isatom(target))
+		if(target.loc != src || target == l_hand || target == r_hand)
+			visible_message(SPAN_SUBTLE("[SPAN_BOLD("\The [src]")] looks at \the [A]."), exclude_mobs = list(src))
+
 //mob verbs are faster than object verbs. See http://www.byond.com/forum/?post=1326139&page=2#comment8198716 for why this isn't atom/verb/examine()
-/mob/verb/examinate(atom/A as mob|obj|turf in view())
+/mob/verb/examinate(atom/A as atom/movable in view())
 	set name = "Examine"
 	set category = "IC"
 
-	if((is_blind(src) || usr && usr.stat) && !isobserver(src))
-		to_chat(src, "<span class='notice'>Something is there but you can't see it.</span>")
+	if(!ismovable(A))
+		to_chat(src, SPAN_OCCULT("Wait, how do you do this?"))
+		return
+	if((A.is_invisible_to(src) || is_blind(src) || usr && usr.stat) && !isobserver(src))
+		to_chat(src, SPAN_NOTICE("Something is there but you can't see it."))
 		return 1
 
 	face_atom(A)
-
-	if(!isghost(src))
-		if(A.loc != src || A == l_hand || A == r_hand)
-			for(var/mob/M in viewers(4, src))
-				if(M == src)
-					continue
-				if(M.client && M.client.get_preference_value(/datum/client_preference/examine_messages) == GLOB.PREF_SHOW)
-					if(M.is_blind() || is_invisible_to(M))
-						continue
-					to_chat(M, "<span class='subtle'><b>\The [src]</b> looks at \the [A].</span>")
+	look_at(A)
 
 	var/distance = INFINITY
 	if(isghost(src) || stat == DEAD)
@@ -338,14 +337,13 @@
 		if(source_turf && source_turf.z == target_turf?.z)
 			distance = get_dist(source_turf, target_turf)
 
-	if(!A.examine(src, distance))
-		crash_with("Improper /examine() override: [log_info_line(A)]")
+	to_chat(src, A.examine(src, distance))
 
 /mob/verb/pointed(atom/A as mob|obj|turf in view())
 	set name = "Point To"
 	set category = "Object"
 
-	if(!src || !isturf(src.loc) || !(A in view(src.loc)))
+	if(!isturf(loc) || !(A in view(loc)))
 		return 0
 	if(istype(A, /obj/effect/decal/point))
 		return 0
@@ -356,9 +354,7 @@
 
 	var/obj/P = new /obj/effect/decal/point(tile)
 	P.set_invisibility(invisibility)
-	spawn (20)
-		if(P)
-			qdel(P)	// qdel
+	QDEL_IN(P, 2 SECONDS)
 
 	face_atom(A)
 	return 1

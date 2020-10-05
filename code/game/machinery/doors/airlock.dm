@@ -1422,14 +1422,12 @@ About the new airlock wires panel:
 /obj/machinery/door/airlock/examine(mob/user)
 	. = ..()
 	if (lock_cut_state == BOLTS_EXPOSED)
-		to_chat(user, "The bolt cover has been cut open.")
+		. += "The bolt cover has been cut open."
 	if (lock_cut_state == BOLTS_CUT)
-		to_chat(user, "The door bolts have been cut.")
+		. += "The door bolts have been cut."
 	if(brace)
-		to_chat(user, "\The [brace] is installed on \the [src], preventing it from opening.")
-		to_chat(user, brace.examine_health())
-
-/obj/machinery/door/airlock/autoname
+		. += "\The [brace] is installed on \the [src], preventing it from opening."
+		. += brace.examine_health())
 
 /obj/machinery/door/airlock/autoname/New()
 	var/area/A = get_area(src)

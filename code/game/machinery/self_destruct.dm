@@ -103,10 +103,10 @@
 /obj/machinery/self_destruct/examine(mob/user)
 	. = ..()
 	if(damaged)
-		to_chat(user, "<span class='warning'>[src] is damaged, it needs repairs.</span>")
+		. += "<span class='warning'>[src] is damaged, it needs repairs.</span>"
 		return
 	if(armed)
-		to_chat(user, "[src] is armed and ready.")
+		. += "[src] is armed and ready."
 		return
 	if(cylinder)
 		to_chat(user, "[src] is loaded and ready to be armed.")

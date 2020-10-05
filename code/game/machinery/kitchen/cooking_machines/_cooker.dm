@@ -40,9 +40,9 @@
 /obj/machinery/cooker/examine(mob/user)
 	. = ..()
 	if(cooking_obj)
-		to_chat(user, "You can see \a [cooking_obj] inside.")
+		. += "You can see \a [cooking_obj] inside."
 	if(panel_open)
-		to_chat(user, "The panel is open")
+		. += "The panel is open"
 
 /obj/machinery/cooker/components_are_accessible(path)
 	return !cooking && ..()
@@ -56,14 +56,14 @@
 	set waitfor = 0  //So that any remaining parts of calling proc don't have to wait for the long cooking time ahead.
 
 	if(cooking)
-		to_chat(user, "<span class='warning'>\The [src] is running!</span>")
+		to_chat(user, SPAN_WARNING("\The [src] is running!")
 		return
 
 	if((. = component_attackby(I, user)))
 		return
 
 	if(!cook_type || (stat & (NOPOWER|BROKEN)))
-		to_chat(user, "<span class='warning'>\The [src] is not working.</span>")
+		to_chat(user, SPAN_WARNING("\The [src] is not working.")
 		return
 
 	// We are trying to cook a grabbed mob.

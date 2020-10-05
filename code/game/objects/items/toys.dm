@@ -236,7 +236,7 @@
 /obj/item/toy/crossbow/examine(mob/user, distance)
 	. = ..()
 	if(distance <= 2 && bullets)
-		to_chat(user, "<span class='notice'>It is loaded with [bullets] foam darts!</span>")
+		. += "<span class='notice'>It is loaded with [bullets] foam darts!</span>"
 
 /obj/item/toy/ammo/crossbow
 	name = "foam dart"

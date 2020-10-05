@@ -288,7 +288,7 @@
 /obj/machinery/cryopod/examine(mob/user)
 	. = ..()
 	if (occupant && user.Adjacent(src))
-		occupant.examine(arglist(args))
+		. += occupant.examine(arglist(args))
 
 //Lifted from Unity stasis.dm and refactored.
 /obj/machinery/cryopod/Process()

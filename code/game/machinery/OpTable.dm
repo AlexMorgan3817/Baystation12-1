@@ -34,8 +34,7 @@
 	. = ..()
 	
 /obj/machinery/optable/examine(mob/user)
-	. = ..()
-	to_chat(user, "<span class='notice'>The neural suppressors are switched [suppressing ? "on" : "off"].</span>")
+	. = ..() + SPAN_NOTICE("The neural suppressors are switched [suppressing ? "on" : "off"].")
 
 /obj/machinery/optable/ex_act(severity)
 

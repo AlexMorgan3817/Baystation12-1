@@ -247,11 +247,8 @@ its easier to just keep the beam vertical.
 	for(var/obj/effect/overlay/beam/O in orange(10,src)) if(O.BeamSource==src) qdel(O)
 
 
-// A type overriding /examine() should either return the result of ..() or return TRUE if not calling ..()
-// Calls to ..() should generally not supply any arguments and instead rely on BYOND's automatic argument passing
-// There is no need to check the return value of ..(), this is only done by the calling /examinate() proc to validate the call chain
 /atom/proc/examine(mob/user, distance, infix = "", suffix = "")
-	//This reformat names to get a/an properly working on item descriptions when they are bloody
+	. = ""
 	var/f_name = "\a [src][infix]."
 	if(blood_color && !istype(src, /obj/effect/decal))
 		if(gender == PLURAL)
@@ -260,9 +257,8 @@ its easier to just keep the beam vertical.
 			f_name = "a "
 		f_name += "<font color ='[blood_color]'>stained</font> [name][infix]!"
 
-	to_chat(user, "[icon2html(src, user)] That's [f_name] [suffix]")
-	to_chat(user, desc)
-	return TRUE
+	. += "[icon2html(src, user)] That's [f_name] [suffix]"
+	. += desc
 
 // called by mobs when e.g. having the atom as their machine, pulledby, loc (AKA mob being inside the atom) or buckled var set.
 // see code/modules/mob/mob_movement.dm for more.
@@ -304,7 +300,7 @@ its easier to just keep the beam vertical.
 	return
 
 /atom/proc/lava_act()
-	visible_message("<span class='danger'>\The [src] sizzles and melts away, consumed by the lava!</span>")
+	visible_message(SPAN_DANGER("\The [src] sizzles and melts away, consumed by the lava!"))
 	playsound(src, 'sound/effects/flare.ogg', 100, 3)
 	qdel(src)
 	. = TRUE
@@ -398,7 +394,7 @@ its easier to just keep the beam vertical.
 		if (exclude_mobs?.len && (M in exclude_mobs))
 			exclude_mobs -= M
 			continue
-		if(M.see_invisible >= invisibility)
+		if(is_invisible_to(M))
 			M.show_message(message, VISIBLE_MESSAGE, blind_message, AUDIBLE_MESSAGE)
 		else if(blind_message)
 			M.show_message(blind_message, AUDIBLE_MESSAGE)

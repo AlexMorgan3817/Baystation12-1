@@ -8,8 +8,7 @@
 	var/uses = 1        // Uses before the kit deletes itself.
 
 /obj/item/device/kit/examine(mob/user)
-	. = ..()
-	to_chat(user, "It has [uses] use\s left.")
+	. = ..() + "It has [uses] use\s left."
 
 /obj/item/device/kit/inherit_custom_item_data(var/datum/custom_item/citem)
 	new_name = citem.item_name
@@ -86,8 +85,7 @@
 	var/removable = null
 
 /obj/item/device/kit/paint/examine(mob/user)
-	. = ..()
-	to_chat(user, "This kit will add a '[new_name]' decal to a exosuit'.")
+	. = ..() + "This kit will add a '[new_name]' decal to a exosuit'."
 
 // exosuit kits.
 /obj/item/device/kit/paint/powerloader/flames_red

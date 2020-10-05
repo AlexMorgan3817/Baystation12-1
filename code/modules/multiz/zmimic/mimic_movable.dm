@@ -189,13 +189,13 @@
 	plane = OPENTURF_MAX_PLANE
 
 /atom/movable/openspace/turf_overlay/attackby(obj/item/W, mob/user)
-	loc.attackby(W, user)
+	. += loc.attackby(W, user)
 
 /atom/movable/openspace/turf_overlay/attack_hand(mob/user as mob)
-	loc.attack_hand(user)
+	. += loc.attack_hand(user)
 
 /atom/movable/openspace/turf_overlay/attack_generic(mob/user as mob)
-	loc.attack_generic(user)
+	. = loc.attack_generic(user)
 
 /atom/movable/openspace/turf_overlay/examine(mob/examiner)
-	loc.examine(examiner)
+	. = loc.examine(examiner)
